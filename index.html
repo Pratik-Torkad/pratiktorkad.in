@@ -452,57 +452,38 @@
             margin-top: 5rem;
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             nav {
                 top: 10px;
                 left: 50%;
                 transform: translateX(-50%);
-                padding: 0.8rem 1rem;
+                padding: 0.6rem 1rem;
                 width: calc(100% - 20px);
-                max-width: 400px;
+                max-width: none;
+                border-radius: 25px;
             }
 
             .nav-links {
-                gap: 1.8rem;
+                gap: 1rem;
+                justify-content: space-between;
+                width: 100%;
             }
 
             .nav-links a {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                padding: 0.5rem 0.8rem;
+                border-radius: 15px;
+                transition: all 0.3s;
+                white-space: nowrap;
+                flex: 1;
+                text-align: center;
             }
 
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(42, 42, 42, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                align-items: center;
-                padding: 2rem;
-                transition: left 0.3s;
-                border-radius: 0;
-                gap: 1.5rem;
-            }
-
-            .nav-links.active {
-                left: 0;
+            .nav-links a:hover,
+            .nav-links a.active {
+                background: rgba(245, 158, 11, 0.2);
+                color: var(--accent);
             }
 
             .section-title {
@@ -510,11 +491,18 @@
             }
 
             .page {
-                padding: 90px 5% 20px 5%;
+                padding: 80px 5% 20px 5%;
             }
 
             .profile-name {
                 font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.6rem;
             }
         }
     </style>
@@ -522,9 +510,6 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
         <ul class="nav-links" id="navLinks">
             <li><a onclick="showPage('about')" class="active">About</a></li>
             <li><a onclick="showPage('career')">Career</a></li>
@@ -953,26 +938,13 @@
             });
             event.target.classList.add('active');
             
-            // Close mobile menu if open
-            document.getElementById('navLinks').classList.remove('active');
-            const icon = document.getElementById('mobileMenuBtn').querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            // Navigation always visible
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
+        // No mobile menu needed - always visible
     </script>
 </body>
 </html>
